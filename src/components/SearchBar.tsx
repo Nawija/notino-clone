@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
@@ -10,7 +10,7 @@ const SearchParams = dynamic(() => import("@/src/components/SearchParams"));
 
 export default function SearchBar() {
   const searchParams = useSearchParams();
-  const [search, setSearch] = useState(searchParams.get("szukaj") || "");
+  const [search, setSearch] = useState(searchParams.get("produkty") || "");
   const [filteredProducts, setFilteredProducts] = useState<PortfolioItem[]>([]);
   const inputRef = useRef<HTMLDivElement>(null);
 
@@ -28,6 +28,9 @@ export default function SearchBar() {
 
     return () => clearTimeout(timer);
   }, [search]);
+  const handleFocus = () => {
+    document.body.classList.toggle('bg-hidden')
+  };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
@@ -50,19 +53,21 @@ export default function SearchBar() {
   }, []);
 
   return (
-    <div className="relative mr-5" ref={inputRef}>
+    <div className="relative mx-4 mr-5 w-full" ref={inputRef}>
       <form>
         <input
           type="text"
           value={search}
+          onFocus={handleFocus}
+          onBlur={handleFocus}
           onChange={handleSearchChange}
-          placeholder="Szukaj"
-          className="w-44 rounded-md border border-gray-300 px-2 py-1"
+          placeholder="nazwa produktu,marka"
+          className=" w-full border border-gray-300 px-2 py-2 text-xs focus:outline-none"
         />
       </form>
       {filteredProducts.length > 0 && (
-        <div className="border-second anim-opacity no-scrollbar absolute -left-1/2 top-10 z-10 h-max max-h-[40vh] w-80 overflow-y-auto rounded-lg border bg-gray-100/10 p-6 backdrop-blur-xl lg:left-0">
-          <p className="text-main mb-4">Szukane:</p>
+        <div className="no-scrollbar bg-second absolute left-0 top-full z-10 h-max max-h-[50vh] w-full overflow-y-auto p-4 shadow-2xl">
+          <p className="text-main text-gray mb-4">Produkty:</p>
           <ul className="flex flex-col items-center justify-center space-y-2">
             {filteredProducts.slice(0, 6).map((item, index) => (
               <SearchParams

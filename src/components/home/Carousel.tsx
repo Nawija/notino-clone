@@ -1,6 +1,6 @@
 "use client";
+import { ArrowLeft, ArrowRight } from "@/src/components/ui/svg/Arrows";
 import { PORTFOLIO } from "@/src/constants";
-import { ArrowLeft, ArrowRight } from "@/src/ui/svg/Arrows";
 import { useEffect, useRef, useState } from "react";
 
 export default function Carousel() {

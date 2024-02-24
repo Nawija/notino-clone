@@ -1,7 +1,7 @@
+import TextBacgroud from "@/src/components/ui/background/TextBacgroud";
+import { MainBtn } from "@/src/components/ui/buttons/MainBtn";
+import { SecondBtn } from "@/src/components/ui/buttons/SecondBtn";
 import { SCROLLING_LABEL } from "@/src/constants";
-import TextBacgroud from "@/src/ui/background/TextBacgroud";
-import { MainBtn } from "@/src/ui/buttons/MainBtn";
-import { SecondBtn } from "@/src/ui/buttons/SecondBtn";
 import Link from "next/link";
 
 export default function Hero() {
@@ -21,8 +21,12 @@ export default function Hero() {
           oferować usługi na najwyższym poziomie!
         </p>
         <div className="flex items-center justify-center space-x-5">
-          <Link href="/darmowa-wycena"><MainBtn>Indywidualna</MainBtn></Link>
-          <Link href="/szablony"><SecondBtn>Gotowa</SecondBtn></Link>
+          <Link href="/darmowa-wycena">
+            <MainBtn>Indywidualna</MainBtn>
+          </Link>
+          <Link href="/szablony">
+            <SecondBtn>Gotowa</SecondBtn>
+          </Link>
         </div>
       </div>
       <div className="relative mx-auto mt-12 flex w-full max-w-screen-md items-center justify-center overflow-x-hidden ">

@@ -3,16 +3,15 @@
 import { NAV_LINKS } from "@/src/constants";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
-import { MainBtn } from "../buttons/MainBtn";
-import { SecondBtn } from "../buttons/SecondBtn";
-import { Logo } from "../svg/Logo";
+import { CiHeart } from "react-icons/ci";
+import { LuUser2 } from "react-icons/lu";
+import { SlBasket } from "react-icons/sl";
+import { Logo } from "../ui/svg/Logo";
 
 const SearchBar = dynamic(() => import("@/src/components/SearchBar"));
 
 const Header = () => {
-  const pathname = usePathname();
   const [lastScrollY, setLastScrollY] = useState(0);
   const [visible, setVisible] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,7 +19,7 @@ const Header = () => {
   const controlNavbarAndHeaderBackground = useCallback(() => {
     if (typeof window !== "undefined") {
       const currentScrollY = window.scrollY;
-      const newVisible = lastScrollY > currentScrollY || currentScrollY < 40;
+      const newVisible = lastScrollY > currentScrollY || currentScrollY < 800;
 
       if (newVisible !== visible) setVisible(newVisible);
       if (currentScrollY !== lastScrollY) setLastScrollY(currentScrollY);
@@ -65,61 +64,23 @@ const Header = () => {
 
   return (
     <header
-      className={`bg-body border-second sticky top-0 z-50 w-full border-b px-6 py-4 text-sm font-medium transition-all duration-500 ease-in-out lg:py-3 ${
+      className={`bg-main sticky top-0 z-50 w-full px-6 pb-3 pt-5 text-sm font-medium transition-all duration-300 ease-in-out ${
         !visible ? "-translate-y-[120%]" : ""
       }`}
     >
-      <nav
-        className={` mx-auto flex w-full max-w-screen-2xl items-center justify-between `}
-      >
-        <Link href="/" onClick={closeMenu} className="z-10 mr-12 text-white">
+      <nav className={` mx-auto flex w-full items-center justify-between`}>
+        <Link href="/" onClick={closeMenu}>
           <Logo h={27} w={27} />
         </Link>
-        <ul
-          className={`border-main bg-main absolute left-0 top-0 flex h-screen w-72 flex-col items-center justify-center space-y-7 border-r px-12 backdrop-blur-sm transition-transform lg:absolute lg:left-1/2 lg:top-1/2 lg:h-auto lg:w-max lg:-translate-x-1/2 lg:-translate-y-1/2 lg:flex-row lg:items-center lg:justify-center lg:space-y-0 lg:rounded-lg lg:border lg:bg-none lg:px-4 lg:py-2 lg:backdrop-blur-none ${
-            isMenuOpen
-              ? "translate-x-0 duration-200 "
-              : "-translate-x-full duration-500"
-          } `}
-        >
-          {NAV_LINKS.map((link) => (
-            <li key={link.label}>
-              <Link
-                href={link.href}
-                className={`rounded-xl px-4 py-2 text-lg font-semibold transition-colors duration-300 hover:text-white lg:text-sm lg:font-medium ${
-                  pathname === link.href ? "text-white" : ""
-                }`}
-                onClick={closeMenu}
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
 
-          <li>
-            <Link href="/szablony" onClick={closeMenu} className="lg:hidden">
-              <SecondBtn className="mt-2 w-52">Szablony</SecondBtn>
-            </Link>
-          </li>
-
-          <li>
-            <Link
-              href="darmowa-wycena"
-              onClick={closeMenu}
-              className="lg:hidden "
-            >
-              <MainBtn className="w-52">Wycena</MainBtn>
-            </Link>
-          </li>
-        </ul>
-        <div className="flex items-center justify-center">
-          <SearchBar />
-          <Link href="/szablony" className="mr-4 hidden lg:flex">
-            <SecondBtn>Szablony</SecondBtn>
-          </Link>
-          <Link href="darmowa-wycena" className=" hidden lg:flex">
-            <MainBtn>Wycena</MainBtn>
-          </Link>
+        <SearchBar />
+        <div className="flex items-center justify-center space-x-5">
+          <LuUser2 className="text-2xl text-white " />
+          <CiHeart className="text-2xl text-white " />
+          <button className="flex-c">
+            <SlBasket className="fill-white text-2xl " />
+            <p>Koszyk</p>
+          </button>
         </div>
         <button
           aria-label="Menu"
@@ -141,6 +102,30 @@ const Header = () => {
             }`}
           />
         </button>
+      </nav>
+      <nav className="mt-4">
+        <ul className="text-second flex">
+          <li>
+            <Link
+              href="/promocje"
+              className={`bg-pink-700 px-2 py-0.5 text-lg font-semibold transition-colors duration-300 hover:text-white lg:text-sm lg:font-medium`}
+              onClick={closeMenu}
+            >
+              Promocje
+            </Link>
+          </li>
+          {NAV_LINKS.map((link) => (
+            <li key={link.label}>
+              <Link
+                href={link.href}
+                className={`px-4 py-2 text-lg font-semibold transition-colors duration-300 hover:text-white lg:text-sm lg:font-medium`}
+                onClick={closeMenu}
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </nav>
     </header>
   );
