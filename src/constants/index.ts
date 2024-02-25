@@ -25,6 +25,21 @@ export const NAV_LINKS = [
   },
 ];
 
+export const MARKI = [
+  {
+    label: "dior",
+  },
+  {
+    label: "paco rabane",
+  },
+  {
+    label: "savage",
+  },
+  {
+    label: "hugo boss",
+  },
+];
+
 export const SCROLLING_LABEL = [
   {
     label: "Szybkość stron",
@@ -273,7 +288,7 @@ export const PORTFOLIO = [
   },
   {
     id: "nazoltej",
-    href: '/',
+    href: "/",
     url: "https://i.pinimg.com/736x/29/94/46/2994467025050e73069872c6d1583419.jpg",
     smallUrl1:
       "https://i.pinimg.com/736x/29/94/46/2994467025050e73069872c6d1583419.jpg",

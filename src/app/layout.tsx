@@ -23,6 +23,7 @@ export default function RootLayout({
         <HeroTopBanner />
         <Header />
         {children}
+        <div id="blurr" />
         <div className="h-[140vh]" />
       </body>
     </html>
